@@ -6,7 +6,7 @@ public class AngSoonTong {
     public static void main(String[] args) {
         System.out.println("Eh! I'm Soon Tong\nWhat you want?!");
 
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         boolean running = true;
         int index = 0;
         Scanner sc = new Scanner(System.in);
@@ -19,17 +19,19 @@ public class AngSoonTong {
                 running = false;
             } else if (Objects.equals(curr, "list")) {
                 int num = 0;
+                System.out.println("Oi! This one your list.");
 
                 while (num < index) {
-                    System.out.printf("%d. %s\n", num + 1, list[num]);
+                    System.out.printf("%d." + list[num] + "\n", num + 1);
                     num++;
                 }
 
             } else {
-                list[index] = curr;
+                Task newTask = new Task(curr);
+                list[index] = newTask;
                 index++;
 
-                System.out.printf("added: %s\n", curr);
+                System.out.printf("added: " + newTask.toString() + "\n", curr);
             }
 
         }
