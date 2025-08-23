@@ -67,12 +67,8 @@ public class AngSoonTong {
                     num++;
                 }
 
-            } else {
-                Task newTask = new Task(curr);
-                list[index] = newTask;
-                index++;
+            } else { // if no keywords are detected
 
-                System.out.printf("added: " + newTask + "\n", curr);
             }
 
         }
