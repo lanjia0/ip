@@ -4,8 +4,8 @@ public class Event extends Task{
 
     public Event(String name, String start, String end) {
         super(name);
-        this.start = start;
-        this.end = end;
+        this.start = start.substring(5);
+        this.end = end.substring(3);
     }
 
     @Override
