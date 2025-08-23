@@ -24,6 +24,15 @@ public class AngSoonTong {
                        Objects.equals(words[0], "event") ||
                         Objects.equals(words[0], "deadline")) {
                 String str = words[0];
+
+                // checking for no task description after task keyword
+                try {
+                    String test = words[1];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Oi! The description cannot be empty la!\n");
+                    continue;
+                }
+
                 if (Objects.equals(str, "todo")) {
                     Task newTask = new ToDo(slash[0].substring(5));
                     list[index] = newTask;
@@ -68,7 +77,7 @@ public class AngSoonTong {
                 }
 
             } else { // if no keywords are detected
-
+                System.out.println("Eh! Say properly leh, I don't know what that means la!\n");
             }
 
         }
