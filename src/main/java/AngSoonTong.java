@@ -15,14 +15,15 @@ public class AngSoonTong {
 
             String curr = sc.nextLine();
             String[] words = curr.split(" "); // split by spaces
-            String firstWord = words[0];      // take the first word
+            String firstWord = words[0]; // take the first word
             String[] slash = curr.split("/");
 
-            if (Objects.equals(curr, "bye")) {
+            if (Objects.equals(curr, "bye")) { // exiting the program
                 running = false;
+
             } else if (Objects.equals(words[0], "todo") ||
                        Objects.equals(words[0], "event") ||
-                        Objects.equals(words[0], "deadline")) {
+                        Objects.equals(words[0], "deadline")) { // handles the cases whereby a new kind of Task is created
                 String str = words[0];
 
                 // checking for no task description after task keyword
@@ -55,19 +56,19 @@ public class AngSoonTong {
                     System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
                     System.out.printf("Now your list got %d tasks.\n", index);
                 }
-            } else if (Objects.equals(firstWord, "mark")) {
+            } else if (Objects.equals(firstWord, "mark")) { // marking a task as done
                 int x = Integer.valueOf(words[1]);
                 Task currTask = list[x - 1];
                 currTask.markDone();
 
                 System.out.println("Ok la! Do already\n" + currTask);
-            } else if (Objects.equals(firstWord, "unmark")) {
+            } else if (Objects.equals(firstWord, "unmark")) { // unmarking a task
                 int x = Integer.valueOf(words[1]);
                 Task currTask = list[x - 1];
                 currTask.markUndone();
 
                 System.out.println("Huh why haven't do?!\n" + currTask);
-            } else if (Objects.equals(curr, "list")) {
+            } else if (Objects.equals(curr, "list")) { // returning the full list
                 int num = 0;
                 System.out.println("Oi! This one your list.");
 
@@ -82,6 +83,6 @@ public class AngSoonTong {
 
         }
 
-        System.out.println("Bye. Why you still here?!");
+        System.out.println("Bye. Why you still here?!"); // ending message
     }
 }

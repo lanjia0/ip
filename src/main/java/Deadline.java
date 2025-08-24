@@ -6,7 +6,7 @@ public class Deadline extends Task {
         this.dueDate = dueDate.substring(3);
     }
 
-    @Override
+    @Override // custom toString representation for deadline
     public String toString() {
         return String.format("[D]" + super.toString() + "(by: %s)", dueDate);
     }

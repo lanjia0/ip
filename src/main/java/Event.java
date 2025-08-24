@@ -8,7 +8,7 @@ public class Event extends Task{
         this.end = end.substring(3);
     }
 
-    @Override
+    @Override // custom toString representation for event
     public String toString() {
         return String.format("[E]" + super.toString() + "(from: %s to: %s)", start, end);
     }
