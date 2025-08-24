@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -10,7 +9,6 @@ public class AngSoonTong {
         boolean running = true;
         int index = 0;
         Scanner sc = new Scanner(System.in);
-        int numOfDeleted = 0;
 
         while (running) {
 
@@ -41,21 +39,21 @@ public class AngSoonTong {
                     index++;
 
                     System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
-                    System.out.printf("Now your list got %d tasks.\n", index - numOfDeleted);
+                    System.out.printf("Now your list got %d tasks.\n", index);
                 } else if (Objects.equals(str, "event")) {
                     Task newTask = new Event(slash[0].substring(6),slash[1], slash[2]);
                     list[index] = newTask;
                     index++;
 
                     System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
-                    System.out.printf("Now your list got %d tasks.\n", index - numOfDeleted);
+                    System.out.printf("Now your list got %d tasks.\n", index);
                 } else {
                     Task newTask = new Deadline(slash[0].substring(9), slash[1]);
                     list[index] = newTask;
                     index++;
 
                     System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
-                    System.out.printf("Now your list got %d task.\n", index - numOfDeleted);
+                    System.out.printf("Now your list got %d task.\n", index);
                 }
             } else if (Objects.equals(firstWord, "mark")) { // marking a task as done
                 int x = Integer.valueOf(words[1]);
@@ -71,23 +69,28 @@ public class AngSoonTong {
                 System.out.println("Huh why haven't do?!\n" + currTask);
             } else if (Objects.equals(curr, "list")) { // returning the full list
                 int num = 0;
-                int count = 1;
                 System.out.println("Oi! This one your list.");
 
                 while (num < index) {
-                    if (list[num] == null) { continue; } // skip deleted objects
-                    System.out.printf("%d." + list[num] + "\n", count);
+                    System.out.printf("%d." + list[num] + "\n", num + 1);
                     num++;
-                    count++;
+
                 }
             } else if (Objects.equals(firstWord, "delete")) { // deleting a task
                 int x = Integer.valueOf(words[1]);
                 Task currTask = list[x - 1];
-                list[x - 1] = null;
-                numOfDeleted++;
+                int iter = x;
+
+                // iter through rest of array and shift 1 index forward
+                while (iter < index) {
+                    list[iter - 1] = list[iter];
+                    iter++;
+                }
+                // decrement index
+                index--;
 
                 System.out.println("Ok la! I delete already ah:\n" + currTask);
-                System.out.printf("Now you got %d task only.\n", index - numOfDeleted);
+                System.out.printf("Now you got %d task only.\n", index);
             } else { // if no keywords are detected
                 System.out.println("Eh! Say properly leh, I don't know what that means la!\n");
             }
