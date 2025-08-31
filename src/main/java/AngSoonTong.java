@@ -5,6 +5,7 @@ public class AngSoonTong {
     public static void main(String[] args) {
         System.out.println("Eh! I'm Soon Tong\nWhat you want?!");
 
+        // init array of Tasks
         Task[] list = new Task[100];
         boolean running = true;
         int index = 0;
