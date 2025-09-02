@@ -9,4 +9,13 @@ public class ToDo extends Task {
     public String toString() {
         return String.format("[T]" + super.toString());
     }
+
+    // write to file format
+
+    @Override
+    public String toFileFormat() {
+        return "T | " +
+                (super.isDone() ? "1" : "0") +
+                " | " + super.getName();
+    }
 }
