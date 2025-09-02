@@ -18,6 +18,6 @@ public class Event extends Task{
         return "D | " +
                 (super.isDone() ? "1" : "0") +
                 " | " + super.getName() +
-                " | " + this.start + "-" + this.end;
+                " | " + this.start + " | " + this.end;
     }
 }
