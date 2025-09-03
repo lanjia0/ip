@@ -1,15 +1,40 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class AngSoonTong {
-    public static void main(String[] args) {
-        System.out.println("Eh! I'm Soon Tong\nWhat you want?!");
+    private static void saveTasks(Storage storage, Task[] list, int index) {
+        try {
+            List<String> lines = new ArrayList<>();
+            for (int i = 0; i < index; i++) {
+                lines.add(list[i].toFileFormat());
+            }
+            storage.save(lines);
+        } catch (IOException e) {
+            System.out.println("Error saving file: " + e.getMessage());
+        }
+    }
 
-        // init array of Tasks
+    public static void main(String[] args) {
+        System.out.println("Eh! I'm Soon Tong\nWhat you want?!"); // greeting message
+
+        Storage storage = new Storage("./data/tasks.txt");
         Task[] list = new Task[100];
         boolean running = true;
         int index = 0;
         Scanner sc = new Scanner(System.in);
+
+        try {
+            for (String line : storage.load()) {
+                Task t = TaskDecoder.decode(line);
+                list[index] = t;
+                index++;
+            }
+        } catch (IOException e) {
+            System.out.println("Wah cannot read file leh: " + e.getMessage());
+        }
 
         while (running) {
 
@@ -41,6 +66,10 @@ public class AngSoonTong {
 
                     System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
                     System.out.printf("Now your list got %d tasks.\n", index);
+
+
+                    saveTasks(storage, list, index);
+
                 } else if (Objects.equals(str, "event")) {
                     Task newTask = new Event(slash[0].substring(6),slash[1], slash[2]);
                     list[index] = newTask;
@@ -48,6 +77,9 @@ public class AngSoonTong {
 
                     System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
                     System.out.printf("Now your list got %d tasks.\n", index);
+
+                    saveTasks(storage, list, index);
+
                 } else {
                     Task newTask = new Deadline(slash[0].substring(9), slash[1]);
                     list[index] = newTask;
@@ -55,6 +87,9 @@ public class AngSoonTong {
 
                     System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
                     System.out.printf("Now your list got %d task.\n", index);
+
+                    saveTasks(storage, list, index);
+
                 }
             } else if (Objects.equals(firstWord, "mark")) { // marking a task as done
                 int x = Integer.valueOf(words[1]);
@@ -62,12 +97,18 @@ public class AngSoonTong {
                 currTask.markDone();
 
                 System.out.println("Ok la! Do already\n" + currTask);
+
+                saveTasks(storage, list, index);
+
             } else if (Objects.equals(firstWord, "unmark")) { // unmarking a task
                 int x = Integer.valueOf(words[1]);
                 Task currTask = list[x - 1];
                 currTask.markUndone();
 
                 System.out.println("Huh why haven't do?!\n" + currTask);
+
+                saveTasks(storage, list, index);
+
             } else if (Objects.equals(curr, "list")) { // returning the full list
                 int num = 0;
                 System.out.println("Oi! This one your list.");
@@ -89,6 +130,8 @@ public class AngSoonTong {
                 }
                 // decrement index
                 index--;
+
+                saveTasks(storage, list, index);
 
                 System.out.println("Ok la! I delete already ah:\n" + currTask);
                 System.out.printf("Now you got %d task only.\n", index);
