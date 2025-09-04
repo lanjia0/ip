@@ -12,7 +12,7 @@ public class Deadline extends Task {
     @Override // custom toString representation for deadline
     public String toString() {
         return String.format("[D]" + super.toString() +
-                "(by: " + dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")");
+                "(by: " + dueDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")");
     }
 
     @Override

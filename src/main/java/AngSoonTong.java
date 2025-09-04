@@ -71,7 +71,11 @@ public class AngSoonTong {
                     saveTasks(storage, list, index);
 
                 } else if (Objects.equals(str, "event")) {
-                    Task newTask = new Event(slash[0].substring(6),slash[1], slash[2]);
+                    Task newTask = new Event(
+                            slash[0].substring(6).trim(),
+                            slash[1].substring(5).trim(),  // remove "from "
+                            slash[2].substring(3).trim()   // remove "to "
+                    );
                     list[index] = newTask;
                     index++;
 
@@ -81,7 +85,8 @@ public class AngSoonTong {
                     saveTasks(storage, list, index);
 
                 } else {
-                    Task newTask = new Deadline(slash[0].substring(9), slash[1]);
+                    Task newTask = new Deadline(slash[0].substring(9),
+                            slash[1].substring(3).trim()); // remove "by"
                     list[index] = newTask;
                     index++;
 
