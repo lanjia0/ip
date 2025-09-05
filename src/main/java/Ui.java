@@ -14,23 +14,23 @@ public class Ui {
     }
 
     // method to print custom message
-    public void showMessage(String message) {
+    public void show(String message) {
         System.out.println(message);
     }
 
     // prints greeting
     public void showGreeting() {
-        showMessage("Eh! I'm Soon Tong\nWhat you want?!");
+        show("Eh! I'm Soon Tong\nWhat you want?!");
     }
 
     // prints goodbye message
     public void showGoodbye() {
-        showMessage("Bye. Why you still here?!");
+        show("Bye. Why you still here?!");
     }
 
     // prints error message
     public void showError() {
-        showMessage("Walao, cannot load data file leh!");
+        show("Walao, cannot load data file leh!");
     }
 }
 

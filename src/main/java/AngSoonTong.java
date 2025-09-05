@@ -18,13 +18,14 @@ public class AngSoonTong {
     }
 
     public static void main(String[] args) {
-        System.out.println("Eh! I'm Soon Tong\nWhat you want?!"); // greeting message
-
         Storage storage = new Storage("./data/tasks.txt");
         Task[] list = new Task[100];
         boolean running = true;
         int index = 0;
-        Scanner sc = new Scanner(System.in);
+        // init Ui Object
+        Ui ui = new Ui();
+
+        ui.showGreeting(); // greeting message
 
         try {
             for (String line : storage.load()) {
@@ -33,12 +34,12 @@ public class AngSoonTong {
                 index++;
             }
         } catch (IOException e) {
-            System.out.println("Wah cannot read file leh: " + e.getMessage());
+            ui.show("Wah cannot read file leh: " + e.getMessage());
         }
 
         while (running) {
 
-            String curr = sc.nextLine();
+            String curr = ui.readCommand();
             String[] words = curr.split(" "); // split by spaces
             String firstWord = words[0]; // take the first word
             String[] slash = curr.split("/");
@@ -55,7 +56,7 @@ public class AngSoonTong {
                 try {
                     String test = words[1];
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Oi! The description cannot be empty la!\n");
+                    ui.show("Oi! The description cannot be empty la!\n");
                     continue;
                 }
 
@@ -64,8 +65,8 @@ public class AngSoonTong {
                     list[index] = newTask;
                     index++;
 
-                    System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
-                    System.out.printf("Now your list got %d tasks.\n", index);
+                    ui.show("Steady! I add this already:\n  " + newTask + "\n");
+                    ui.show(String.format("Now your list got %d tasks.\n", index));
 
 
                     saveTasks(storage, list, index);
@@ -79,8 +80,8 @@ public class AngSoonTong {
                     list[index] = newTask;
                     index++;
 
-                    System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
-                    System.out.printf("Now your list got %d tasks.\n", index);
+                    ui.show(String.format("Steady! I add this already:\n  " + newTask + "\n"));
+                    ui.show(String.format("Now your list got %d tasks.\n", index));
 
                     saveTasks(storage, list, index);
 
@@ -90,8 +91,8 @@ public class AngSoonTong {
                     list[index] = newTask;
                     index++;
 
-                    System.out.printf("Steady! I add this already:\n  " + newTask + "\n");
-                    System.out.printf("Now your list got %d task.\n", index);
+                    ui.show(String.format("Steady! I add this already:\n  " + newTask + "\n"));
+                    ui.show(String.format("Now your list got %d task.\n", index));
 
                     saveTasks(storage, list, index);
 
@@ -101,7 +102,7 @@ public class AngSoonTong {
                 Task currTask = list[x - 1];
                 currTask.markDone();
 
-                System.out.println("Ok la! Do already\n" + currTask);
+                ui.show("Ok la! Do already\n" + currTask);
 
                 saveTasks(storage, list, index);
 
@@ -110,16 +111,16 @@ public class AngSoonTong {
                 Task currTask = list[x - 1];
                 currTask.markUndone();
 
-                System.out.println("Huh why haven't do?!\n" + currTask);
+                ui.show("Huh why haven't do?!\n" + currTask);
 
                 saveTasks(storage, list, index);
 
             } else if (Objects.equals(curr, "list")) { // returning the full list
                 int num = 0;
-                System.out.println("Oi! This one your list.");
+                ui.show("Oi! This one your list.");
 
                 while (num < index) {
-                    System.out.printf("%d." + list[num] + "\n", num + 1);
+                    ui.show(String.format("%d." + list[num] + "\n", num + 1));
                     num++;
 
                 }
@@ -138,14 +139,14 @@ public class AngSoonTong {
 
                 saveTasks(storage, list, index);
 
-                System.out.println("Ok la! I delete already ah:\n" + currTask);
-                System.out.printf("Now you got %d task only.\n", index);
+                ui.show("Ok la! I delete already ah:\n" + currTask);
+                ui.show(String.format("Now you got %d task only.\n", index));
             } else { // if no keywords are detected
-                System.out.println("Eh! Say properly leh, I don't know what that means la!\n");
+                ui.show("Eh! Say properly leh, I don't know what that means la!\n");
             }
 
         }
 
-        System.out.println("Bye. Why you still here?!"); // ending message
+        ui.showGoodbye(); // ending message
     }
 }
