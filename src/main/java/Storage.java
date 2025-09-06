@@ -1,31 +1,50 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public List<String> load() throws IOException {
+    /**
+     * Load tasks from the save file.
+     * Returns an ArrayList of tasks (decoded).
+     */
+    public ArrayList<Task> load() throws IOException {
+        ArrayList<Task> tasks = new ArrayList<>();
+
         File file = new File(filePath);
         if (!file.exists()) {
-            // If folder doesn't exist, create it
+            // create directories if they do not exist
             file.getParentFile().mkdirs();
             file.createNewFile();
-            return new ArrayList<>(); // empty task list on first run
+            return tasks; // return empty list if no file yet
         }
-        return Files.readAllLines(Paths.get(filePath));
+
+        List<String> lines = Files.readAllLines(Paths.get(filePath));
+        for (String line : lines) {
+            Task t = TaskDecoder.decode(line);
+            if (t != null) {
+                tasks.add(t);
+            }
+        }
+        return tasks;
     }
 
-    public void save(List<String> lines) throws IOException {
+    /**
+     * Save all tasks to the save file.
+     */
+    public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (String line : lines) {
-            fw.write(line + System.lineSeparator());
+        for (Task task : tasks.getAll()) { // TaskList should expose getAll()
+            fw.write(task.toFileFormat() + System.lineSeparator());
         }
         fw.close();
     }

@@ -10,14 +10,15 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    // constructor
+    public TaskList(ArrayList<Task> list) {
+        this.tasks = list;
+    }
+
     // method to write tasks to storage file
     public void save(Storage storage) {
         try {
-            List<String> lines = new ArrayList<>();
-            for (Task task : tasks) {   // tasks is your internal ArrayList<Task>
-                lines.add(task.toFileFormat());
-            }
-            storage.save(lines);
+            storage.save(this);
         } catch (IOException e) {
             System.out.println("Error saving file: " + e.getMessage());
         }
@@ -41,6 +42,10 @@ public class TaskList {
     // returns size of taskList
     public int size() {
         return tasks.size();
+    }
+
+    public List<Task> getAll() {
+        return tasks; // your internal ArrayList<Task>
     }
 }
 
