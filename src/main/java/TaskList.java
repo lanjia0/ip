@@ -1,45 +1,46 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TaskList {
-    private Task[] tasks;
-    private int size;
+    private ArrayList<Task> tasks;
 
     // default constructor
     public TaskList() {
-        tasks = new Task[100];
-        size = 0;
+        tasks = new ArrayList<>();
     }
 
-    // constructor
-    public TaskList(Task[] loadedTasks, int count) {
-        tasks = loadedTasks;
-        size = count;
+    // method to write tasks to storage file
+    public void save(Storage storage) {
+        try {
+            List<String> lines = new ArrayList<>();
+            for (Task task : tasks) {   // tasks is your internal ArrayList<Task>
+                lines.add(task.toFileFormat());
+            }
+            storage.save(lines);
+        } catch (IOException e) {
+            System.out.println("Error saving file: " + e.getMessage());
+        }
     }
 
     // method to add Task to task list
     public void add(Task t) {
-        tasks[size] = t;
-        size++;
+        tasks.add(t);
     }
 
     // getter to retrieve tasks in task list
     public Task get(int index) {
-        return tasks[index];
+        return tasks.get(index);
     }
 
     // delete task from task list
     public void delete(int index) {
-        for (int i = index; i < size - 1; i++) {
-            tasks[i] = tasks[i + 1];
-        }
-        size--;
+        tasks.remove(index);
     }
 
-
+    // returns size of taskList
     public int size() {
-        return size;
-    }
-
-    public Task[] getAll() {
-        return tasks;
+        return tasks.size();
     }
 }
 

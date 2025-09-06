@@ -2,26 +2,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
+
 
 public class AngSoonTong {
-    private static void saveTasks(Storage storage, Task[] list, int index) {
-        try {
-            List<String> lines = new ArrayList<>();
-            for (int i = 0; i < index; i++) {
-                lines.add(list[i].toFileFormat());
-            }
-            storage.save(lines);
-        } catch (IOException e) {
-            System.out.println("Error saving file: " + e.getMessage());
-        }
-    }
-
     public static void main(String[] args) {
         Storage storage = new Storage("./data/tasks.txt");
-        Task[] list = new Task[100];
+        // init list of tasks
+        TaskList tasks = new TaskList();
         boolean running = true;
-        int index = 0;
         // init Ui Object
         Ui ui = new Ui();
 
@@ -30,8 +18,7 @@ public class AngSoonTong {
         try {
             for (String line : storage.load()) {
                 Task t = TaskDecoder.decode(line);
-                list[index] = t;
-                index++;
+                tasks.add(t);
             }
         } catch (IOException e) {
             ui.show("Wah cannot read file leh: " + e.getMessage());
@@ -62,14 +49,13 @@ public class AngSoonTong {
 
                 if (Objects.equals(str, "todo")) {
                     Task newTask = new ToDo(slash[0].substring(5));
-                    list[index] = newTask;
-                    index++;
+                    tasks.add(newTask);
 
                     ui.show("Steady! I add this already:\n  " + newTask + "\n");
-                    ui.show(String.format("Now your list got %d tasks.\n", index));
+                    ui.show(String.format("Now your list got %d tasks.\n", tasks.size()));
 
 
-                    saveTasks(storage, list, index);
+                    tasks.save(storage);
 
                 } else if (Objects.equals(str, "event")) {
                     Task newTask = new Event(
@@ -77,70 +63,58 @@ public class AngSoonTong {
                             slash[1].substring(5).trim(),  // remove "from "
                             slash[2].substring(3).trim()   // remove "to "
                     );
-                    list[index] = newTask;
-                    index++;
+                    tasks.add(newTask);
 
                     ui.show(String.format("Steady! I add this already:\n  " + newTask + "\n"));
-                    ui.show(String.format("Now your list got %d tasks.\n", index));
+                    ui.show(String.format("Now your list got %d tasks.\n", tasks.size()));
 
-                    saveTasks(storage, list, index);
+                    tasks.save(storage);
 
                 } else {
                     Task newTask = new Deadline(slash[0].substring(9),
                             slash[1].substring(3).trim()); // remove "by"
-                    list[index] = newTask;
-                    index++;
+                    tasks.add(newTask);
 
                     ui.show(String.format("Steady! I add this already:\n  " + newTask + "\n"));
-                    ui.show(String.format("Now your list got %d task.\n", index));
+                    ui.show(String.format("Now your list got %d task.\n", tasks.size()));
 
-                    saveTasks(storage, list, index);
+                    tasks.save(storage);
 
                 }
             } else if (Objects.equals(firstWord, "mark")) { // marking a task as done
-                int x = Integer.valueOf(words[1]);
-                Task currTask = list[x - 1];
+                int x = Integer.parseInt(words[1]);
+                Task currTask = tasks.get(x - 1);
                 currTask.markDone();
 
                 ui.show("Ok la! Do already\n" + currTask);
 
-                saveTasks(storage, list, index);
+                tasks.save(storage);
 
             } else if (Objects.equals(firstWord, "unmark")) { // unmarking a task
-                int x = Integer.valueOf(words[1]);
-                Task currTask = list[x - 1];
+                int x = Integer.parseInt(words[1]);
+                Task currTask = tasks.get(x - 1);
                 currTask.markUndone();
 
                 ui.show("Huh why haven't do?!\n" + currTask);
 
-                saveTasks(storage, list, index);
+                tasks.save(storage);
 
             } else if (Objects.equals(curr, "list")) { // returning the full list
-                int num = 0;
                 ui.show("Oi! This one your list.");
 
-                while (num < index) {
-                    ui.show(String.format("%d." + list[num] + "\n", num + 1));
-                    num++;
-
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.printf("%d. %s\n", i + 1, tasks.get(i));
                 }
+
             } else if (Objects.equals(firstWord, "delete")) { // deleting a task
-                int x = Integer.valueOf(words[1]);
-                Task currTask = list[x - 1];
-                int iter = x;
+                int x = Integer.parseInt(words[1]);
+                Task currTask = tasks.get(x - 1);
+                tasks.delete(x - 1);
 
-                // iter through rest of array and shift 1 index forward
-                while (iter < index) {
-                    list[iter - 1] = list[iter];
-                    iter++;
-                }
-                // decrement index
-                index--;
-
-                saveTasks(storage, list, index);
+                tasks.save(storage);
 
                 ui.show("Ok la! I delete already ah:\n" + currTask);
-                ui.show(String.format("Now you got %d task only.\n", index));
+                ui.show(String.format("Now you got %d task only.\n", tasks.size()));
             } else { // if no keywords are detected
                 ui.show("Eh! Say properly leh, I don't know what that means la!\n");
             }
