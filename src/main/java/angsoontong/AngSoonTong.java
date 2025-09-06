@@ -13,6 +13,10 @@ public class AngSoonTong {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * constructor to initialize AngSoonTong
+     * @param filePath outlines location for which tasks will be written to and saved
+     */
     public AngSoonTong(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,7 +27,7 @@ public class AngSoonTong {
         }
     }
 
-    public void run() throws IOException {
+    public void run() {
         ui.showGreeting();
         boolean running = true;
         Scanner sc = new Scanner(System.in);
