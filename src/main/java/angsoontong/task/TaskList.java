@@ -40,8 +40,10 @@ public class TaskList {
     }
 
     // delete task from task list
-    public void delete(int index) {
+    public Task delete(int index) {
+        Task deletedTask = this.get(index);
         tasks.remove(index);
+        return deletedTask;
     }
 
     // returns size of taskList

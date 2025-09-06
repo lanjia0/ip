@@ -32,8 +32,7 @@ public class Parser {
 
             case "delete":
                 int deleteIndex = Integer.parseInt(words[1]) - 1;
-                Task deleted = tasks.get(deleteIndex);
-                tasks.delete(deleteIndex);
+                Task deleted = tasks.delete(deleteIndex);
 
                 tasks.save(storage);
                 return ui.showDeleted(deleted, tasks.size());
