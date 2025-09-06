@@ -1,3 +1,5 @@
+package angsoontong.task;
+
 public abstract class Task {
     private boolean isDone;
     private final String NAME;

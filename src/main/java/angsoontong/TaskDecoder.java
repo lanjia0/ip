@@ -1,3 +1,11 @@
+package angsoontong;
+
+import angsoontong.task.Task;
+import angsoontong.task.Deadline;
+import angsoontong.task.Event;
+import angsoontong.task.ToDo;
+
+
 public class TaskDecoder {
     public static Task decode(String line) {
         String[] parts = line.split(" \\| ");
