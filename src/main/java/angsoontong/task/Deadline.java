@@ -2,14 +2,6 @@ package angsoontong.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import angsoontong.ui.Ui;
-import angsoontong.storage.Storage;
-import angsoontong.parser.Parser;
-import angsoontong.task.TaskList;
-import angsoontong.task.Task;
-import angsoontong.task.Deadline;
-import angsoontong.task.Event;
-
 
 public class Deadline extends Task {
     protected LocalDate dueDate;

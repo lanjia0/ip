@@ -1,14 +1,5 @@
 package angsoontong.task;
 
-import angsoontong.ui.Ui;
-import angsoontong.storage.Storage;
-import angsoontong.parser.Parser;
-import angsoontong.task.TaskList;
-import angsoontong.task.Task;
-import angsoontong.task.Deadline;
-import angsoontong.task.Event;
-
-
 public class ToDo extends angsoontong.task.Task {
 
     public ToDo(String name) {

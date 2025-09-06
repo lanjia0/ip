@@ -1,11 +1,8 @@
 package angsoontong.parser;
 
+import angsoontong.task.*;
 import angsoontong.ui.Ui;
 import angsoontong.storage.Storage;
-import angsoontong.task.TaskList;
-import angsoontong.task.Task;
-import angsoontong.task.Deadline;
-import angsoontong.task.Event;
 
 public class Parser {
     public static String parse(String input, TaskList tasks, Ui ui, Storage storage) {
