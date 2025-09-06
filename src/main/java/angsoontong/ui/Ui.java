@@ -7,7 +7,7 @@ import angsoontong.task.TaskList;
 import angsoontong.task.Task;
 import angsoontong.task.Deadline;
 import angsoontong.task.Event;
-
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -58,6 +58,22 @@ public class Ui {
         StringBuilder sb = new StringBuilder("Oi! This one your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
+        }
+        return sb.toString();
+    }
+
+    public String showFindResults(List<Integer> indices, TaskList tasks) {
+        if (indices.isEmpty()) {
+            return "No matching tasks found lah.";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        int line = 1;
+        for (Integer idx : indices) {
+            sb.append(line++)
+                    .append(".")
+                    .append(tasks.get(idx)) // prints like [T][X] read book
+                    .append("\n");
         }
         return sb.toString();
     }

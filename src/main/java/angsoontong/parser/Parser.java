@@ -37,6 +37,14 @@ public class Parser {
                 tasks.save(storage);
                 return ui.showDeleted(deleted, tasks.size());
 
+            case "find":
+                String keyword = input.length() > 4 ? input.substring(5).trim() : "";
+                if (keyword.isEmpty()) {
+                    ui.show("Eh, tell me what to find leh! (e.g., find book)");
+                }
+                var indices = tasks.findIndices(keyword);
+                return ui.showFindResults(indices, tasks);
+
             case "todo":
                 Task todo = new ToDo(input.substring(5));
                 tasks.add(todo);

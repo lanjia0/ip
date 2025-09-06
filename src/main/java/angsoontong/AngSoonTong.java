@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 
 public class AngSoonTong {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public AngSoonTong(String filePath) {
         ui = new Ui();
@@ -23,7 +23,7 @@ public class AngSoonTong {
         }
     }
 
-    public void run() throws IOException {
+    public void run() {
         ui.showGreeting();
         boolean running = true;
         Scanner sc = new Scanner(System.in);

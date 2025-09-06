@@ -29,6 +29,23 @@ public class TaskList {
         }
     }
 
+    /**
+     * a case-insensitive search method that returns indices of matching results
+     * @param keyword String that is the search term to match with task name
+     * @return List of indices of matching results
+     */
+    public List<Integer> findIndices(String keyword) {
+        String k = keyword.toLowerCase();
+        List<Integer> results = new ArrayList<>();
+        for (int i = 0; i < size(); i++) {
+            Task t = get(i);
+            if (t.toString().toLowerCase().contains(k)) {
+                results.add(i); // 0-based index; Ui will print as (i+1)
+            }
+        }
+        return results;
+    }
+
     // method to add Task to task list
     public void add(Task t) {
         tasks.add(t);
