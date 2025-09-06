@@ -53,11 +53,11 @@ public class Ui {
     }
 
     public String showMarked(Task task) {
-        return "Ok la! Do already\n" + task;
+        return "Ok la! Do already\n" + task + "\n";
     }
 
     public String showUnmarked(Task task) {
-        return "Huh why haven't do?!\n" + task;
+        return "Huh why haven't do?!\n" + task + "\n";
     }
 }
 

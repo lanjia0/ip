@@ -35,6 +35,6 @@ public class AngSoonTong {
     }
 
     public static void main(String[] args) throws IOException {
-        new AngSoonTong("data/data.txt").run();
+        new AngSoonTong("data/tasks.txt").run();
     }
 }
