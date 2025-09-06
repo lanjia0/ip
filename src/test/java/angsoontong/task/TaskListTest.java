@@ -15,6 +15,7 @@ public class TaskListTest {
         assertEquals(1, tasks.size());
     }
 
+    // test involving deletion of tasks from tasklist
     @Test
     public void deleteTask_validIndex_taskRemoved() {
         TaskList tasks = new TaskList();
@@ -30,6 +31,7 @@ public class TaskListTest {
         assertEquals(t2, tasks.get(0)); // remaining task is correct
     }
 
+    // test trying to access task that does not exist
     @Test
     public void deleteTask_invalidIndex_throwsException() {
         TaskList tasks = new TaskList();

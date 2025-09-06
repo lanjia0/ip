@@ -13,6 +13,10 @@ public class AngSoonTong {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * constructor to initialize AngSoonTong
+     * @param filePath outlines location for which tasks will be written to and saved
+     */
     public AngSoonTong(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

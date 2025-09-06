@@ -13,14 +13,11 @@ import java.util.Scanner;
 public class Ui {
     private Scanner sc;
 
-    // constructor
+    /**
+     * constructor
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
-    }
-
-    // to receive next input from user
-    public String readCommand() {
-        return sc.nextLine();
     }
 
     // method to print custom message
@@ -38,12 +35,21 @@ public class Ui {
         show("Bye. Why you still here?!");
     }
 
-    // methods for different actions
+    /**
+     * method to print message for adding a task
+     * @param task Task to be added into task list
+     * @param size Size of task list after the task has been added
+     */
     public String showAdded(Task task, int size) {
         return String.format("Steady! I add this already:\n  %s\nNow your list got %d tasks.\n",
                 task, size);
     }
 
+    /**
+     * method to print message for deleting a task
+     * @param task Task to be removed from task list
+     * @param size Size of task list after the task has been deleted
+     */
     public String showDeleted(Task task, int size) {
         return String.format("Ok la! I delete already ah:\n  %s\nNow you got %d task%s only.\n",
                 task,
@@ -51,6 +57,10 @@ public class Ui {
                 size == 1 ? "" : "s");
     }
 
+    /**
+     * method to print out every task in the list to ui
+     * @param tasks TaskList instance which is a list of all current tasks
+     */
     public String showList(TaskList tasks) {
         if (tasks.size() == 0) {
             return "Eh your list empty sia!";

@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
-
+    /**
+     * test for adding tasks to the task list
+     */
     @Test
     public void parse_addTodo_success() {
         Storage storage = new Storage("data/test-data.txt");
@@ -22,6 +24,9 @@ public class ParserTest {
         assertTrue(response.contains("Steady! I add this already"));
     }
 
+    /**
+     * test for marking tasks as done
+     */
     @Test
     public void parse_markTodo_success() {
         Storage storage = new Storage("data/test-data.txt");
