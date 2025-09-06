@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class AngSoonTong {
     public static void main(String[] args) {
+        // init storage
         Storage storage = new Storage("./data/tasks.txt");
         // init list of tasks
         TaskList tasks = new TaskList();
-        boolean running = true;
         // init Ui Object
         Ui ui = new Ui();
 
