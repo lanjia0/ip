@@ -23,7 +23,8 @@ public class AngSoonTong {
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
-            ui.show("Eh got problem la!");
+            // if loading fails, start with empty list and keep going
+            this.tasks = new TaskList();
         }
     }
 
@@ -46,5 +47,12 @@ public class AngSoonTong {
 
     public static void main(String[] args) throws IOException {
         new AngSoonTong("data/tasks.txt").run();
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return Parser.parse(input, tasks, ui, storage);
     }
 }

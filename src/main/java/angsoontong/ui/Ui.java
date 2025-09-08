@@ -26,13 +26,13 @@ public class Ui {
     }
 
     // prints greeting
-    public void showGreeting() {
-        show("Eh! I'm Soon Tong\nWhat you want?!");
+    public String showGreeting() {
+        return "Eh! I'm Soon Tong\nWhat you want?!";
     }
 
     // prints goodbye message
-    public void showGoodbye() {
-        show("Bye. Why you still here?!");
+    public String showGoodbye() {
+        return "Bye. Why you still here?!";
     }
 
     /**
