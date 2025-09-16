@@ -1,12 +1,7 @@
 package angsoontong.ui;
 
-import angsoontong.ui.Ui;
-import angsoontong.storage.Storage;
-import angsoontong.parser.Parser;
 import angsoontong.task.TaskList;
 import angsoontong.task.Task;
-import angsoontong.task.Deadline;
-import angsoontong.task.Event;
 import java.util.List;
 import java.util.Scanner;
 

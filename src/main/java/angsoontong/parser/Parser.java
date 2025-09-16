@@ -5,6 +5,12 @@ import angsoontong.ui.Ui;
 import angsoontong.storage.Storage;
 
 public class Parser {
+    // helper that runs runnable, and then subsequently saves mutated task list
+    private static void mutateAndSave(Runnable mutation, TaskList tasks, Storage storage) {
+        mutation.run();
+        tasks.save(storage);
+    }
+
     public static String parse(String input, TaskList tasks, Ui ui, Storage storage) {
         String[] words = input.split(" ");
         String command = words[0];
@@ -19,15 +25,15 @@ public class Parser {
             case "mark":
                 int markIndex = Integer.parseInt(words[1]) - 1;
                 Task marked = tasks.get(markIndex);
-                marked.markDone();
-                tasks.save(storage);
+
+                mutateAndSave(() -> marked.markDone(), tasks, storage);
                 return ui.showMarked(marked);
 
             case "unmark":
                 int unmarkIndex = Integer.parseInt(words[1]) - 1;
                 Task unmarked = tasks.get(unmarkIndex);
-                unmarked.markUndone();
-                tasks.save(storage);
+
+                mutateAndSave(() -> unmarked.markUndone(), tasks, storage);
                 return ui.showUnmarked(unmarked);
 
             case "delete":
@@ -47,22 +53,22 @@ public class Parser {
 
             case "todo":
                 Task todo = new ToDo(input.substring(5));
-                tasks.add(todo);
-                tasks.save(storage);
+
+                mutateAndSave(() -> tasks.add(todo), tasks, storage);
                 return ui.showAdded(todo, tasks.size());
 
             case "deadline":
                 String[] deadlineParts = input.split("/by ");
                 Task deadline = new Deadline(deadlineParts[0].substring(9), deadlineParts[1]);
-                tasks.add(deadline);
-                tasks.save(storage);
+
+                mutateAndSave(() -> tasks.add(deadline), tasks, storage);
                 return ui.showAdded(deadline, tasks.size());
 
             case "event":
                 String[] eventParts = input.split("/from |/to ");
                 Task event = new Event(eventParts[0].substring(6), eventParts[1], eventParts[2]);
-                tasks.add(event);
-                tasks.save(storage);
+
+                mutateAndSave(() -> tasks.add(event), tasks, storage);
                 return ui.showAdded(event, tasks.size());
 
             default:
