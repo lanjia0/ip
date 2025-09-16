@@ -57,6 +57,9 @@ public class TaskList {
 
     // getter to retrieve tasks in task list
     public Task get(int index) {
+        // ensures input index is within bounds
+        assert index >= 0 && index < tasks.size() : "get index out of bounds: " + index;
+
         return tasks.get(index);
     }
 
@@ -65,6 +68,9 @@ public class TaskList {
      * @param index represents the integer index of the task to be deleted in the ArrayList
      */
     public Task delete(int index) {
+        // ensures index to be deleted is within bounds
+        assert index >= 0 && index < tasks.size() : "delete index out of bounds: " + index;
+
         Task deletedTask = this.get(index);
         tasks.remove(index);
         return deletedTask;

@@ -8,6 +8,7 @@ import angsoontong.task.ToDo;
 
 public class TaskDecoder {
     public static Task decode(String line) {
+        assert line != null : "decode line is null";
         String[] parts = line.split(" \\| ");
         String type = parts[0];
         boolean isDone = parts[1].equals("1");

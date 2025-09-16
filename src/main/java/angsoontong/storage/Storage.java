@@ -15,6 +15,7 @@ public class Storage {
     private final String filePath;
 
     public Storage(String filePath) {
+        assert filePath != null && !filePath.isBlank() : "Storage filePath must not be empty";
         this.filePath = filePath;
     }
 
