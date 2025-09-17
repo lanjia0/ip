@@ -75,20 +75,20 @@ public class Parser {
                 // Usage: tag <index> #tag1 #tag2 ...
                 String[] w = input.trim().split("\\s+");
                 if (w.length < 3) {
-                    return ui.show("tag <index> #tag1 #tag2");
+                    return ui.show("Eh use properly! : tag <index> #tag1 #tag2");
                 }
                 int index;
 
                 try {
                     index = Integer.parseInt(w[1]) - 1;
                 } catch (NumberFormatException e) {
-                    return ui.show("tag <index> #tag1 #tag2");
+                    return ui.show("Eh use properly! : tag <index> #tag1 #tag2");
                 }
 
                 if (index < 0 || index >= tasks.size()) {
                     return "Index out of range.";
                 }
-                var t = tasks.get(index);
+                Task t = tasks.get(index);
 
                 // collect the rest as tags (normalize in Task)
                 java.util.List<String> tags = new java.util.ArrayList<>();
@@ -97,6 +97,33 @@ public class Parser {
                 t.addTags(tags);
                 tasks.save(storage);
                 return ui.showTagged(t);
+
+            case "untag": {
+                // Usage: untag <index> #tag1 #tag2 ...
+                w = input.trim().split("\\s+");
+                if (w.length < 3) {
+                    return ui.show("Eh use properly! : untag <index> #tag1 #tag2");
+                }
+
+                int idx;
+                try {
+                    idx = Integer.parseInt(w[1]) - 1;
+                } catch (NumberFormatException e) {
+                    return ui.show("Eh use properly! : untag <index> #tag1 #tag2");
+                }
+                if (idx < 0 || idx >= tasks.size()) {
+                    return "Index out of range.";
+                }
+
+                t = tasks.get(idx);
+
+                java.util.List<String> tagsToRemove = new java.util.ArrayList<>();
+                for (int i = 2; i < w.length; i++) tagsToRemove.add(w[i]);
+
+                t.removeTags(tagsToRemove);
+                tasks.save(storage);
+                return ui.showUntagged(t);
+            }
 
             default:
                 return "Eh! Say properly leh, I don't know what that means la!\n";

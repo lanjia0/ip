@@ -5,9 +5,7 @@ import angsoontong.ui.Ui;
 import angsoontong.storage.Storage;
 import angsoontong.parser.Parser;
 import angsoontong.task.TaskList;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class AngSoonTong {

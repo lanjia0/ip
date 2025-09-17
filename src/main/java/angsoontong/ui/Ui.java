@@ -27,7 +27,7 @@ public class Ui {
 
     // prints goodbye message
     public String showGoodbye() {
-        return "Bye. Why you still here?!";
+        return "Bye. You still here for what?!";
     }
 
     /**
@@ -69,10 +69,10 @@ public class Ui {
 
     public String showFindResults(List<Integer> indices, TaskList tasks) {
         if (indices.isEmpty()) {
-            return "No matching tasks found lah.";
+            return "No matching tasks found la.";
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n");
+        sb.append("This one your matching tasks! :\n");
         int line = 1;
         for (Integer idx : indices) {
             sb.append(line++)
@@ -85,6 +85,10 @@ public class Ui {
 
     public String showTagged(Task task) {
         return "Ok tag already! :\n  " + task;
+    }
+
+    public String showUntagged(angsoontong.task.Task task) {
+        return "Removed tags liao :\n  " + task;
     }
 
     public String showMarked(Task task) {

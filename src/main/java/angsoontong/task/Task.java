@@ -63,6 +63,14 @@ public abstract class Task {
         return base + suffix;
     }
 
+    public void removeTags(List<String> toRemove) {
+        if (toRemove == null) return;
+        for (String t : toRemove) {
+            String norm = normalizeTag(t);
+            if (!norm.isEmpty()) tags.remove(norm);
+        }
+    }
+
     public String tagsForFile() { return String.join(",", tags); }
 
     // custom toString representation for task
