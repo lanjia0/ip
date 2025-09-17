@@ -11,26 +11,33 @@ public class TaskDecoder {
         assert line != null : "decode line is null";
         String[] parts = line.split(" \\| ");
         String type = parts[0];
-        boolean isDone = parts[1].equals("1");
-        String description = parts[2];
+        Task t;
 
-        Task task;
         switch (type) {
-            case "T":
-                task = new ToDo(description);
-                break;
-            case "D":
-                task = new Deadline(description, parts[3]);
-                break;
-            case "E":
-                task = new Event(description, parts[3], parts[4]);
-                break;
+            case "T": {
+                String desc = parts[2];
+                t = new ToDo(desc);
+                if ("1".equals(parts[1])) t.markDone();
+                if (parts.length >= 4) t.loadTagsFromCsv(parts[3]);
+            }
+            case "D": {
+                String desc = parts[2];
+                String by = parts[3];
+                t = new Deadline(desc, by);
+                if ("1".equals(parts[1])) t.markDone();
+                if (parts.length >= 5) t.loadTagsFromCsv(parts[4]);
+            }
+            case "E": {
+                String desc = parts[2];
+                String start = parts[3];
+                String end = parts[4];
+                t = new Event(desc, start, end);
+                if ("1".equals(parts[1])) t.markDone();
+                if (parts.length >= 6) t.loadTagsFromCsv(parts[5]);
+            }
             default:
                 throw new IllegalArgumentException("Unknown task type: " + type);
         }
-        if (isDone) {
-            task.markDone();
-        }
-        return task;
+
     }
 }

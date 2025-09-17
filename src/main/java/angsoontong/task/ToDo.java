@@ -9,7 +9,7 @@ public class ToDo extends angsoontong.task.Task {
     // custom toString representation
     @Override
     public String toString() {
-        return String.format("[T]" + super.toString());
+        return withTags(String.format("[T]" + super.toString()));
     }
 
     // write to file format
@@ -18,6 +18,7 @@ public class ToDo extends angsoontong.task.Task {
     public String toFileFormat() {
         return "T | " +
                 (super.isDone() ? "1" : "0") +
-                " | " + super.getName();
+                " | " + super.getName() +
+                tagsForFile();
     }
 }

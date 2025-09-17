@@ -16,8 +16,8 @@ public class Ui {
     }
 
     // method to print custom message
-    public void show(String message) {
-        System.out.println(message);
+    public String show(String message) {
+        return message;
     }
 
     // prints greeting
@@ -81,6 +81,10 @@ public class Ui {
                     .append("\n");
         }
         return sb.toString();
+    }
+
+    public String showTagged(Task task) {
+        return "Ok tag already! :\n  " + task;
     }
 
     public String showMarked(Task task) {

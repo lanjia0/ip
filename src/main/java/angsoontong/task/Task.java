@@ -1,8 +1,13 @@
 package angsoontong.task;
 
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 public abstract class Task {
     private boolean isDone;
     private final String NAME;
+    protected final Set<String> tags = new LinkedHashSet<>();
 
     public Task(String name) {
         this.NAME = name;
@@ -28,6 +33,37 @@ public abstract class Task {
     public String getName() {
         return this.NAME;
     }
+
+    public void addTags(List<String> newTags) {
+        if (newTags == null) return;
+        for (String t : newTags) {
+            String norm = normalizeTag(t);
+            if (!norm.isEmpty()) tags.add(norm);
+        }
+    }
+
+    private String normalizeTag(String t) {
+        if (t == null) return "";
+        t = t.trim();
+        if (t.isEmpty()) return "";
+        if (!t.startsWith("#")) t = "#" + t;
+        return t;
+    }
+
+    /** Load tags from CSV saved in file. */
+    public void loadTagsFromCsv(String csv) {
+        if (csv == null || csv.isBlank()) return;
+        for (String piece : csv.split(",")) addTags(List.of(piece));
+    }
+
+    protected String withTags(String base) {
+        if (tags.isEmpty()) return base;
+        // Render like: {#fun #school} appended at end
+        String suffix = " {" + String.join(" ", tags) + "}";
+        return base + suffix;
+    }
+
+    public String tagsForFile() { return String.join(",", tags); }
 
     // custom toString representation for task
     @Override

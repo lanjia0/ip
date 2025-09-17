@@ -71,6 +71,33 @@ public class Parser {
                 mutateAndSave(() -> tasks.add(event), tasks, storage);
                 return ui.showAdded(event, tasks.size());
 
+            case "tag":
+                // Usage: tag <index> #tag1 #tag2 ...
+                String[] w = input.trim().split("\\s+");
+                if (w.length < 3) {
+                    return ui.show("tag <index> #tag1 #tag2");
+                }
+                int index;
+
+                try {
+                    index = Integer.parseInt(w[1]) - 1;
+                } catch (NumberFormatException e) {
+                    return ui.show("tag <index> #tag1 #tag2");
+                }
+
+                if (index < 0 || index >= tasks.size()) {
+                    return "Index out of range.";
+                }
+                var t = tasks.get(index);
+
+                // collect the rest as tags (normalize in Task)
+                java.util.List<String> tags = new java.util.ArrayList<>();
+                for (int i = 2; i < w.length; i++) tags.add(w[i]);
+
+                t.addTags(tags);
+                tasks.save(storage);
+                return ui.showTagged(t);
+
             default:
                 return "Eh! Say properly leh, I don't know what that means la!\n";
         }

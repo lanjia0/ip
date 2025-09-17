@@ -15,9 +15,9 @@ public class Event extends Task{
 
     @Override // custom toString representation for event
     public String toString() {
-        return String.format("[E]" + super.toString() +
+        return withTags(String.format("[E]" + super.toString() +
                 "(from: " + start.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
-                + " to: " + end.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")");
+                + " to: " + end.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")"));
     }
 
     @Override
@@ -25,6 +25,7 @@ public class Event extends Task{
         return "D | " +
                 (super.isDone() ? "1" : "0") +
                 " | " + super.getName() +
-                " | " + this.start + " | " + this.end;
+                " | " + this.start + " | " + this.end +
+                tagsForFile();
     }
 }

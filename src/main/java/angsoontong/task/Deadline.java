@@ -13,8 +13,8 @@ public class Deadline extends Task {
 
     @Override // custom toString representation for deadline
     public String toString() {
-        return String.format("[D]" + super.toString() +
-                "(by: " + dueDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")");
+        return withTags(String.format("[D]" + super.toString() +
+                "(by: " + dueDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")"));
     }
 
     @Override
@@ -22,6 +22,7 @@ public class Deadline extends Task {
         return "D | " +
                 (super.isDone() ? "1" : "0") +
                 " | " + super.getName() +
-                " | " + this.dueDate;
+                " | " + this.dueDate +
+                tagsForFile();
     }
 }
