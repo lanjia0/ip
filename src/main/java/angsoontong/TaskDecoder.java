@@ -19,6 +19,7 @@ public class TaskDecoder {
                 t = new ToDo(desc);
                 if ("1".equals(parts[1])) t.markDone();
                 if (parts.length >= 4) t.loadTagsFromCsv(parts[3]);
+                break;
             }
             case "D": {
                 String desc = parts[2];
@@ -26,6 +27,7 @@ public class TaskDecoder {
                 t = new Deadline(desc, by);
                 if ("1".equals(parts[1])) t.markDone();
                 if (parts.length >= 5) t.loadTagsFromCsv(parts[4]);
+                break;
             }
             case "E": {
                 String desc = parts[2];
@@ -34,10 +36,12 @@ public class TaskDecoder {
                 t = new Event(desc, start, end);
                 if ("1".equals(parts[1])) t.markDone();
                 if (parts.length >= 6) t.loadTagsFromCsv(parts[5]);
+                break;
             }
             default:
                 throw new IllegalArgumentException("Unknown task type: " + type);
         }
 
+        return t;
     }
 }
