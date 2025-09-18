@@ -38,8 +38,23 @@ public abstract class Task {
         if (newTags == null) return;
         for (String t : newTags) {
             String norm = normalizeTag(t);
+            System.out.println("adding " + norm);
             if (!norm.isEmpty()) tags.add(norm);
         }
+    }
+
+    public void removeTags(List<String> toRemove) {
+        if (toRemove == null) return;
+        for (String t : toRemove) {
+            String norm = normalizeTag(t);
+            if (!norm.isEmpty()) {
+                System.out.println("removing " + norm);
+                tags.remove(norm);}
+        }
+    }
+
+    public void clearTags() {
+        tags.clear();
     }
 
     private String normalizeTag(String t) {
@@ -59,19 +74,11 @@ public abstract class Task {
     protected String withTags(String base) {
         if (tags.isEmpty()) return base;
         // Render like: {#fun #school} appended at end
-        String suffix = " {" + String.join(" ", tags) + "}";
+        String suffix = " { " + String.join(" ", tags) + " }";
         return base + suffix;
     }
 
-    public void removeTags(List<String> toRemove) {
-        if (toRemove == null) return;
-        for (String t : toRemove) {
-            String norm = normalizeTag(t);
-            if (!norm.isEmpty()) tags.remove(norm);
-        }
-    }
-
-    public String tagsForFile() { return String.join(",", tags); }
+    public String tagsForFile() { return String.join(", ", tags); }
 
     // custom toString representation for task
     @Override

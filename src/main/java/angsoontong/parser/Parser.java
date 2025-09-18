@@ -102,20 +102,27 @@ public class Parser {
                 // Usage: untag <index> #tag1 #tag2 ...
                 w = input.trim().split("\\s+");
                 if (w.length < 3) {
-                    return ui.show("Eh use properly! : untag <index> #tag1 #tag2");
+                    return ui.show("Eh use properly! : untag <index> [#tag1 #tag2 ... | all]");
                 }
 
                 int idx;
                 try {
                     idx = Integer.parseInt(w[1]) - 1;
                 } catch (NumberFormatException e) {
-                    return ui.show("Eh use properly! : untag <index> #tag1 #tag2");
+                    return ui.show("Eh use properly! : untag <index> [#tag1 #tag2 ... | all]");
                 }
                 if (idx < 0 || idx >= tasks.size()) {
                     return "Index out of range.";
                 }
 
                 t = tasks.get(idx);
+
+                if (w.length == 3 && (w[2].equalsIgnoreCase("all")
+                        || w[2].equalsIgnoreCase("--all"))) {
+                    t.clearTags();
+                    tasks.save(storage);
+                    return ui.showUntagged(t);
+                }
 
                 java.util.List<String> tagsToRemove = new java.util.ArrayList<>();
                 for (int i = 2; i < w.length; i++) tagsToRemove.add(w[i]);
