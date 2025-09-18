@@ -19,6 +19,9 @@ public class Parser {
             case "bye":
                 return "Bye. Why you still here?!";
 
+            case "sing":
+                return "OK 来!";
+
             case "list":
                 return ui.showList(tasks);
 
