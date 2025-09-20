@@ -88,11 +88,11 @@ public class Ui {
     }
 
     public String showUntagged(angsoontong.task.Task task) {
-        return "Removed tags liao :\n  " + task;
+        return "Removed tags liao! :\n  " + task;
     }
 
     public String showMarked(Task task) {
-        return "Ok la! Do already\n" + task + "\n";
+        return "Ok la! Do already!\n" + task + "\n";
     }
 
     public String showUnmarked(Task task) {
