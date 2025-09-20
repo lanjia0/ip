@@ -43,7 +43,7 @@ Example: `event aunt's funeral /from 13 Feb 2025 /to 14 Feb 2025`
 ## Delete
 Remove added tasks easily, with the delete feature.
 
-Example: `delete 2`
+Example: `delete 2`\
 Returns: 
 ```
 Ok la! I delete already ah:
@@ -75,7 +75,7 @@ Ok la! Do already
 
 Or unmark marked tasks if you've made a mistake.
 
-Example: `unmark 2`
+Example: `unmark 2`\
 Returns:
 ```
 Huh why haven't do?!
@@ -85,7 +85,7 @@ Huh why haven't do?!
 ## Tag/Untag
 Add more information to your tasks! By using tags #yay
 
-Example: `tag 2 #fun #holiday`
+Example: `tag 2 #fun #holiday`\
 Returns: 
 ```
 Ok tag already! :
@@ -94,7 +94,7 @@ Ok tag already! :
 
 On the converse, use untag to remove tags.
 
-Example: `untag 2 #fun, #holiday`
+Example: `untag 2 #fun, #holiday`\
 Returns:
 ```
 Removed tags liao! :
@@ -104,7 +104,7 @@ Removed tags liao! :
 ## Find
 Allows you to search for tasks with keywords.
 
-Example: `find CS2100`
+Example: `find CS2100`\
 Returns:
 ```
 This one your matching tasks! :
@@ -122,7 +122,7 @@ Try it for yourself to find out what it does! Soon Tong knows quite a few songs!
 ## Bye
 And finally, when you are done chatting with Soon Tong. Bye lets you quit the chatbot.
 
-Example: `bye`
+Example: `bye`\
 Returns: `Bye. You still here for what?!`
 
 The chatbot closes automatically afterward.
