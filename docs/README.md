@@ -33,12 +33,12 @@ Example: `todo go for class`
 ### 2. Deadline
 Painful tasks you need to complete before a certain date.
 
-Example: `deadline tutorial sheet /by 13 Feb 2025`
+Example: `deadline tutorial sheet /by 2025-09-15`
 
 ### 3. Event
 For the events with start and end dates.
 
-Example: `event aunt's funeral /from 13 Feb 2025 /to 14 Feb 2025`
+Example: `event aunt's funeral /from 2025-02-15 /to 2025-02-16`
 
 ## Delete
 Remove added tasks easily, with the delete feature.
@@ -94,7 +94,7 @@ Ok tag already! :
 
 On the converse, use untag to remove tags.
 
-Example: `untag 2 #fun, #holiday`\
+Example: `untag 2 #fun #holiday`\
 Returns:
 ```
 Removed tags liao! :
