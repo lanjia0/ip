@@ -5,12 +5,24 @@ import angsoontong.ui.Ui;
 import angsoontong.storage.Storage;
 
 public class Parser {
-    // helper that runs runnable, and then subsequently saves mutated task list
+    /**
+     * helper that runs runnable, and then subsequently saves mutated task list
+     * @param mutation Runnable executing the command involved
+     * @param storage Storage to save the new task list to
+     * @param tasks TaskList to call the command on
+     */
     private static void mutateAndSave(Runnable mutation, TaskList tasks, Storage storage) {
         mutation.run();
         tasks.save(storage);
     }
 
+    /**
+     * main parsing command to read input
+     * @param input String input from the user
+     * @param tasks TaskList containing current tasks
+     * @param ui UI to receive String messages from to reply user
+     * @param storage To write changes in task list to
+     */
     public static String parse(String input, TaskList tasks, Ui ui, Storage storage) {
         String[] words = input.split(" ");
         String command = words[0];

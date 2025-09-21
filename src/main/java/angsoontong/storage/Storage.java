@@ -14,6 +14,10 @@ import java.util.List;
 public class Storage {
     private final String filePath;
 
+    /**
+     * constructor
+     * @param filePath address of the storage file to read/write tasks
+     */
     public Storage(String filePath) {
         assert filePath != null && !filePath.isBlank() : "Storage filePath must not be empty";
         this.filePath = filePath;
