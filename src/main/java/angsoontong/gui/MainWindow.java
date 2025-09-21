@@ -37,7 +37,9 @@ public class MainWindow extends AnchorPane {
         LyricLine(double atSec, String text) { this.atSec = atSec; this.text = text; }
     }
 
-    // lyrics
+    /**
+     * lyrics for the 1st song that could possibly be played
+     */
     private final java.util.List<LyricLine> LYRICS1 = java.util.List.of(
             new LyricLine(0.3,  "希望你以后不会后悔没选择我"),
             new LyricLine(6.4,  "也相信你有更好的生活"),
@@ -45,6 +47,9 @@ public class MainWindow extends AnchorPane {
             new LyricLine(15.5,  "默默地为你而执着~")
     );
 
+    /**
+     * lyrics for the 2nd song that could possibly be played
+     */
     private final java.util.List<LyricLine> LYRICS2 = java.util.List.of(
             new LyricLine(0.2,  "gang chant~"),
             new LyricLine(13.6,  "toh teng jit ki ang ji kao!"),
@@ -52,6 +57,9 @@ public class MainWindow extends AnchorPane {
             new LyricLine(28.2,  "I wanna know where you belong~")
     );
 
+    /**
+     * lyrics for the 3rd song that could possibly be played
+     */
     private final java.util.List<LyricLine> LYRICS3 = java.util.List.of(
             new LyricLine(0.0,  "如果让你从新来过你会不会爱我"),
             new LyricLine(5.1,  "爱情让人拥有快乐也会带来折磨"),
@@ -64,6 +72,9 @@ public class MainWindow extends AnchorPane {
     private MediaPlayer player;
     private int currSong;
 
+    /**
+     * access images from resources folder for profile pictures
+     */
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/AhBeng.png"));
     private Image ASTImage = new Image(this.getClass().getResourceAsStream("/images/AngSoonTong.png"));
 
@@ -72,7 +83,9 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the AST instance */
+    /**
+     * Injects the AST instance
+     */
     public void setAngSoonTong(AngSoonTong ast) {
         angSoonTong = ast;
         dialogContainer.getChildren().add(
@@ -80,18 +93,27 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * array containing filePaths for each of the possible songs
+     */
     private static final String[] SONGS = {
             "/audio/song1.wav",
             "/audio/song2.wav",
             "/audio/song3.wav"
     };
 
+    /**
+     * randomly picks a song number and returns its filePath, and sets currSong to that number
+     */
     private String pickRandomSong() {
         int i = ThreadLocalRandom.current().nextInt(SONGS.length);
         this.currSong = i + 1;
         return SONGS[i];
     }
 
+    /**
+     * sing function randomly chooses and then plays a song when sing command is called
+     */
     private void sing() {
 
         // setup media
@@ -135,7 +157,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing
+     * AngSoonTong's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
