@@ -10,15 +10,21 @@ import angsoontong.storage.Storage;
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    // default constructor
+    /**
+     * default constructor
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
-    // constructor
+
+    // alternative constructor commented out - not needed anymore
+    // due to storage read/write feature
+    /*
     public TaskList(ArrayList<Task> list) {
         this.tasks = list;
     }
+    */
 
     /**
      * method to write tasks to storage file
@@ -50,12 +56,16 @@ public class TaskList {
         return results;
     }
 
-    // method to add Task to task list
+    /**
+     * method to add Task to task list
+     */
     public void add(Task t) {
         tasks.add(t);
     }
 
-    // getter to retrieve tasks in task list
+    /**
+     * getter to retrieve tasks in task list
+     */
     public Task get(int index) {
         // ensures input index is within bounds
         assert index >= 0 && index < tasks.size() : "get index out of bounds: " + index;
@@ -84,7 +94,9 @@ public class TaskList {
         return tasks.size();
     }
 
-    // returns the internal ArrayList
+    /**
+     * returns the internal ArrayList
+     */
     public List<Task> getAll() {
         return tasks;
     }

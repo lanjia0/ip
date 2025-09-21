@@ -5,6 +5,10 @@ import angsoontong.task.Task;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Ui class contains methods that produces Strings to be
+ *  displayed on GUI, depending on the specific scenario
+*/
 public class Ui {
     private Scanner sc;
 
@@ -67,6 +71,9 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * method to print out every task found by the find command
+     */
     public String showFindResults(List<Integer> indices, TaskList tasks) {
         if (indices.isEmpty()) {
             return "No matching tasks found la.";
@@ -83,6 +90,10 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * simple methods to indicate a completed action
+     * for tag/untag/mark/unmark commands
+     */
     public String showTagged(Task task) {
         return "Ok tag already! :\n  " + task;
     }

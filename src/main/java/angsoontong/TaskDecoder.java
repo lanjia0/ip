@@ -8,11 +8,14 @@ import angsoontong.task.ToDo;
 
 public class TaskDecoder {
     public static Task decode(String line) {
-        assert line != null : "decode line is null";
+        assert line != null : "decode line is null"; // assertion to make sure no empty input
         String[] parts = line.split(" \\| ");
         String type = parts[0];
         Task t;
 
+        /**
+         * read the task type and return the task with proper description
+         */
         switch (type) {
             case "T": {
                 String desc = parts[2];
@@ -39,6 +42,7 @@ public class TaskDecoder {
                 break;
             }
             default:
+                // if task is not a T, D or E
                 throw new IllegalArgumentException("Unknown task type: " + type);
         }
 

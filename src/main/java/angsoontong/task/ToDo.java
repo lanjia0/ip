@@ -2,18 +2,26 @@ package angsoontong.task;
 
 public class ToDo extends angsoontong.task.Task {
 
+    /**
+     * constructor
+     * @param name String name to describe task
+     */
     public ToDo(String name) {
         super(name);
     }
 
-    // custom toString representation
+    /**
+     * custom toString representation
+     */
     @Override
     public String toString() {
         return withTags(String.format("[T]" + super.toString()));
     }
 
-    // write to file format
 
+    /**
+     * method to format task description to write to storage file
+     */
     @Override
     public String toFileFormat() {
         return "T | " +

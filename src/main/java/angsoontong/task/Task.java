@@ -14,26 +14,38 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    // mark task as done
+    /**
+     * mark task as done
+     */
     public void markDone() {
         this.isDone = true;
     }
 
-    // unmarks task, task is not done
+    /**
+     * unmarks task, task is not done
+     */
     public void markUndone() {
         this.isDone = false;
     }
 
-    // getter for boolean isDone
+    /**
+     * getter for boolean isDone
+     */
     public boolean isDone() {
         return this.isDone;
     }
 
-    // getter for name
+    /**
+     * getter for name
+     */
     public String getName() {
         return this.NAME;
     }
 
+    /**
+     * add tags to this task object
+     * @param newTags list of tags to be added
+     */
     public void addTags(List<String> newTags) {
         if (newTags == null) return;
         for (String t : newTags) {
@@ -43,6 +55,10 @@ public abstract class Task {
         }
     }
 
+    /**
+     * add tags to this task object
+     * @param toRemove list of tags to be removed
+     */
     public void removeTags(List<String> toRemove) {
         if (toRemove == null) return;
         for (String t : toRemove) {
@@ -65,7 +81,9 @@ public abstract class Task {
         return t;
     }
 
-    /** Load tags from CSV saved in file. */
+    /**
+     * Load tags from CSV saved in file.
+     */
     public void loadTagsFromCsv(String csv) {
         if (csv == null || csv.isBlank()) return;
         for (String piece : csv.split(",")) addTags(List.of(piece));
@@ -80,12 +98,16 @@ public abstract class Task {
 
     public String tagsForFile() { return String.join(", ", tags); }
 
-    // custom toString representation for task
+    /**
+     * custom toString representation for task
+     */
     @Override
     public String toString() {
         return String.format("[" + (isDone ? "X" : "") + "] %s", NAME);
     }
 
-    // abstract method for task subclasses to write into file
+    /**
+     * abstract method for task subclasses to write into file
+     */
     public abstract String toFileFormat();
 }
