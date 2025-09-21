@@ -1,6 +1,8 @@
 # Ang Soon Tong User Guide
 > **Ang Soon Tong is a secret society and gang based in Singapore and Malaysia which has been active since the 1950s, mainly in the Sembawang area of Singapore.**
 
+<img width="798" height="1248" alt="image" src="https://github.com/user-attachments/assets/99b6e451-8c52-49ec-8737-5dfc7d67d119" />
+
 [Soon Tong](https://soundcloud.com/21ast/21-ast-pht-gss-18siaokimtian) is your friendly neighbourhood ah beng, he can help you:
 
 - Keep track of your daily tasks/commitments
