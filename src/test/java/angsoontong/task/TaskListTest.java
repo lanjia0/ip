@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
 
+    /**
+     * test involving adding of tasks to tasklist
+     */
     @Test
     public void addTask_sizeIncreases() {
         TaskList tasks = new TaskList();
@@ -15,7 +18,9 @@ public class TaskListTest {
         assertEquals(1, tasks.size());
     }
 
-    // test involving deletion of tasks from tasklist
+    /**
+     * test involving deletion of tasks from tasklist
+     */
     @Test
     public void deleteTask_validIndex_taskRemoved() {
         TaskList tasks = new TaskList();

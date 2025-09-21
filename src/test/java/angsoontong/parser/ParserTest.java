@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     /**
-     * test for adding tasks to the task list
+     * test for parsing command to add tasks to the task list
      */
     @Test
     public void parse_addTodo_success() {
@@ -25,7 +25,7 @@ public class ParserTest {
     }
 
     /**
-     * test for marking tasks as done
+     * test for parsing command to mark tasks as done
      */
     @Test
     public void parse_markTodo_success() {
