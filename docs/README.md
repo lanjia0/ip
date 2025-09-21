@@ -21,8 +21,6 @@ His hobbies
 - [x] Legal activities
 - [x] Listen to his [favourite song](https://soundcloud.com/nicholas-chong-19/crazy-baby-nightcore-remix?si=4a9cc4d856c940eab66aadf5184fc5b4&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing)
 
-// Product screenshot goes here
-
 ## The 3 Types of Tasks
 
 Soon Tong can help you keep track of 3 different kinds of tasks.
