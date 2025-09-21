@@ -70,7 +70,7 @@ Example: `mark 2`\
 Returns:
 ```
 Ok la! Do already
-[T][] go for class 
+[T][X] go for class 
 ```
 
 Or unmark marked tasks if you've made a mistake.
